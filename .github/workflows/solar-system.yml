@@ -6,7 +6,9 @@ on:
     branches:
       - main
       - 'feature/*'
-    
+env:
+  MONGO_USERNAME:  superuser
+  MONGO_PASSWORD: SuperPassword
 jobs:
     unit-testing:
         name: Unit Testing
