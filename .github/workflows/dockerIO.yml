@@ -1,11 +1,11 @@
-name: Solar System Workflow
+name: Solar System Workflow using Docker
 
 on: 
-  workflow_dispatch:
-#   push:
-#     branches:
-#       - main
-#       - 'feature/*'
+#   workflow_dispatch:
+  push:
+    branches:
+      - main
+      - 'feature/*'
 # env:
 #   MONGO_USERNAME:  superuser
 #   MONGO_URI: ${{vars.MONGO_URI}}
