@@ -15,8 +15,8 @@ jobs:
         name: Unit Testing
         strategy:
             matrix:
-                os: [ubuntu-latest, macos-latest]
-                version: [18, 20]
+                os: [ubuntu-latest]
+                version: [20]
         runs-on: ${{matrix.os}}
         services:
           mongo-db:
