@@ -13,7 +13,11 @@ on:
 jobs:
     unit-testing:
         name: Unit Testing
-        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                os: [ubuntu-latest, macos-latest]
+                version: [18, 20]
+        runs-on: ${{matrix.os}}
         services:
           mongo-db:
             image: siddharth67/mongo-db:non-prod
@@ -24,9 +28,9 @@ jobs:
           MONGO_USERNAME: non-prod-user
           MONGO_PASSWORD: non-prod-password
 
-        container: node:20
+        container: node:${{matrix.version}}
         steps:
-        - name: Checkout Repository
+        - name: Checkout Repository - ${{matrix.os}}
           uses: actions/checkout@v4
 
         # - name: Setup NodeJS Version
@@ -34,21 +38,21 @@ jobs:
         #   with:
         #     node-version: 20
     
-        - name: Install Dependencies
+        - name: Install Dependencies - ${{matrix.os}} - ${{matrix.version}}
           run: npm install
     
         - name: Unit Testing  
           run: npm test
           continue-on-error: true
           
-        - name: Archive Test Result
+        - name: Archive Test Result - ${{matrix.os}} - ${{matrix.version}}
           if: always()
           uses: actions/upload-artifact@v3
           with:
             name: Mocha-Test-Result
             path: test-results.xml
 
-        - name:  Cache NPM dependencies
+        - name:  Cache NPM dependencies - ${{matrix.os}} - ${{matrix.version}}
           uses: actions/cache@v3
           with:
             key: ${{runner.os}}-node-modules-${{hashFiles('package-lock.json')}}
