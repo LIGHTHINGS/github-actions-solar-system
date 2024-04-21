@@ -79,11 +79,12 @@ jobs:
           with:
             name: Mocha-Test-Result
         - name: Checking test file
-          run: ls -ltra
+          run: |
+           ls -ltra
+           echo "(TEST=testing-results.xml)"
         - name: Discord notification
           env:
            DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
-           DISCORD_EMBEDS: ${{toJson('test-results.xml')}}
           uses: Ilshidur/action-discord@master
           with:
-              args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
+              args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been containerized. $TEST'
