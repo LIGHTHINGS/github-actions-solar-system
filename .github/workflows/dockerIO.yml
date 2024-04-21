@@ -70,6 +70,7 @@ jobs:
 
 
     Discord_Report:
+      needs: [unit-testing]
       if: always()
       runs-on: ubuntu-latest
       steps:
