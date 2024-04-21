@@ -72,3 +72,19 @@ jobs:
             context: .
             push: true
             tags: 'ghcr.io/lighthings/solar-system:${{github.sha}}'
+    slack_report:
+      runs-on: ubuntu-latest
+      if: always()
+      needs: [unit-testing, docker]
+      steps:
+      - uses: actions/checkout@v4
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
+          SLACK_CHANNEL: github_action_report_channel
+          SLACK_COLOR: ${{job.status}}
+          SLACK_ICON: ''
+          SLACK_MESSAGE: ':hammer_and wrench: Triggered by ${{github.actor}}'
+          SLACK_TITLE: Information
+
