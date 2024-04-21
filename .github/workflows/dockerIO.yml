@@ -81,7 +81,7 @@ jobs:
         - name: Checking test file
           run: |
            ls -ltra
-           echo "(TEST=testing-results.xml)"
+           TEST="(echo testing-results.xml)"
         - name: Discord notification
           env:
            DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
