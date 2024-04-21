@@ -69,17 +69,17 @@ jobs:
             tags: 'docker.io/lighthings/solar-system:${{github.sha}}'
 
 
- Discord_Report:
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download artifact 
-      uses: actions/download-artifact@v3
-      with:
-        name: Mocha-Test-Result
+    Discord_Report:
+      if: always()
+      runs-on: ubuntu-latest
+      steps:
+        - name: Download artifact 
+          uses: actions/download-artifact@v3
+          with:
+            name: Mocha-Test-Result
 
-    - name: Discord Webhook Action
-      uses: tsickert/discord-webhook@v5.3.0
-      with:
-        webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        raw-data: test-results.xml
+        - name: Discord Webhook Action
+          uses: tsickert/discord-webhook@v5.3.0
+          with:
+            webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+            raw-data: test-results.xml
