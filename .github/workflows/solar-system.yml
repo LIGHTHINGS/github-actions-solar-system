@@ -85,6 +85,6 @@ jobs:
           SLACK_CHANNEL: github_action_report_channel
           SLACK_COLOR: ${{job.status}}
           SLACK_ICON: ''
-          SLACK_MESSAGE: ':hammer_and wrench: Triggered by ${{github.actor}}'
+          SLACK_MESSAGE: ':hammer_and_wrench: Triggered by ${{github.actor}}'
           SLACK_TITLE: Information
 
